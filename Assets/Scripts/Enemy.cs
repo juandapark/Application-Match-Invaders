@@ -147,7 +147,8 @@ public class Enemy : GameStateLogic, IEnemy
         }
         else
         {
-            EnemyManager.Instance.RemoveEnemies(this);
+            if (collision.gameObject.tag != BARRIER_NAME)
+                EnemyManager.Instance.RemoveEnemies(this);
         }
 
         if (collision.gameObject.tag == BULLET_NAME)
