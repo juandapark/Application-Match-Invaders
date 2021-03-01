@@ -206,6 +206,7 @@ public class EnemyManager : GameStateLogic
             }
         }
 
+        yield return new WaitForSeconds(0.5f); // wait a second before restarting the level.
         //means the game has been won.
         LevelManager.Instance.GameOver(true);
     }

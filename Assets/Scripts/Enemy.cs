@@ -71,8 +71,9 @@ public class Enemy : GameStateLogic, IEnemy
     /// </summary>
     protected override void OnGameReset()
     {
-        Reset();
         _enemyUI.StopAllCoroutines();
+
+        Reset();
     }
 
     protected override void StartGame()
@@ -103,8 +104,8 @@ public class Enemy : GameStateLogic, IEnemy
     /// </summary>
     public void Reset()
     {
-        gameObject.SetActive(true);
         IsAlive = true;
+        gameObject.SetActive(true);
         _direction = Vector2.right;
         _rid.position = _startPosition;
     }
