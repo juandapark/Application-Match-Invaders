@@ -27,8 +27,6 @@ public class EnemyColumnReference
 
 public class EnemyManager : GameStateLogic
 {
-    private const int SCORE_MULIPLIER = 10; // the score multiplier fot the fibonacci formula.
-
     private static EnemyManager _instance;
 
     public static EnemyManager Instance
@@ -260,10 +258,10 @@ public class EnemyManager : GameStateLogic
         List<Enemy> possibleEnemiesToRemove = GetPossibleEnemiesToRemove(enemies);
         _enemiesToRemove.AddRange(possibleEnemiesToRemove);
 
-        uint count = (uint)possibleEnemiesToRemove.Count;
+        uint count = Convert.ToUInt32(possibleEnemiesToRemove.Count);
 
         // calculates the score based on fibonacci formula.
-        LevelManager.Instance.IncrementScore(count * (FibonacciFormula(count + 1) * SCORE_MULIPLIER));
+        LevelManager.Instance.IncrementScore(ScoreCalculator.ReturnScore(count));
 
         //disables all the enemies and sets a new shooter and a new enemy that sets the direction.
         for (int i = 0; i < possibleEnemiesToRemove.Count; i++)
@@ -280,27 +278,7 @@ public class EnemyManager : GameStateLogic
             }
         }
     }
-    /// <summary>
-    /// Calculate score based on Fibonacci Formula.
-    /// </summary>
-    /// <param name="n"></param>
-    /// <returns></returns>
-    private uint FibonacciFormula(uint n)
-    {
-        uint firstnumber = 0, secondnumber = 1, result = 0;
 
-        if (n == 0) return 0;
-        if (n == 1) return 1;   
-
-        for (uint i = 2; i <= n; i++)
-        {
-            result = firstnumber + secondnumber;
-            firstnumber = secondnumber;
-            secondnumber = result;
-        }
-
-        return result;
-    }
 
     /// <summary>
     /// This gets all the possible enemies to be killed on the position of the grid to the enemy that you passed.
