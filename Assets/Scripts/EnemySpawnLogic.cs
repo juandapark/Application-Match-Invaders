@@ -68,18 +68,16 @@ public class EnemySpawnLogic : MonoBehaviour
         enemy.transform.parent = _startPoint;
 
         Enemy enemyObject = enemy.GetComponent<Enemy>();
-        enemyObject.RowID = rowID;
-        enemyObject.ColumnID = columnID;
 
         //if enemy is on the last row, make it so that it sets the direction.
         if (rowID == _numberOfRows - 1)
         {
-            enemyObject.SetsDirection = true;
+            enemyObject.SetUpEnemy(rowID, columnID, false, true);
         }
         //if enemy is on the first row, make it so that it can shoot.
         else if(rowID == 0)
         {
-            enemyObject.CanShoot = true;
+            enemyObject.SetUpEnemy(rowID, columnID, true, false);
         }
         EnemyManager.Instance.AddEnemy(columnID, enemy.GetComponent<Enemy>());
     }

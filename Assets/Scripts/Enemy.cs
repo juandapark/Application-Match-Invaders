@@ -23,16 +23,15 @@ public class Enemy : GameStateLogic, IEnemy
     private const string BARRIER_NAME = "Barrier"; //The name of the barrier tag.
     private const string BULLET_NAME = "Bullet"; //The name of the Bullet tag.
 
-    // Variables from IEnemy Interface, these are public get and set because coming from the Interface,
-    //this is so is easier to make a change or add a new feature without having to scrap the whole enemy class.
-    public int ColumnID { get; set; }
-    public int RowID { get; set; }
-    public bool CanShoot { get; set; }
-    public float MoveUnits { get;  set; }
+    // Variables from IEnemy Interface.
+    public int ColumnID { get; private set; }
+    public int RowID { get; private set; }
+    public bool CanShoot { get; private set; }
+    public float MoveUnits { get; private set; }
+    public bool SetsDirection { get; private set; }
     //////////////
 
     public bool IsAlive = true;
-    public bool SetsDirection = false;
     public ColorType ColourType;
 
     private EnemyGraphics _enemyUI;
@@ -99,6 +98,20 @@ public class Enemy : GameStateLogic, IEnemy
     private void OnDirectionChange(Vector2 direction)
     {
         _direction = direction;
+    }
+
+    /// <summary>
+    /// Sets Up the Enemy rows and columns.
+    /// </summary>
+    /// <param name="row"></param>
+    /// <param name="column"></param>
+    /// <param name="canShoot"></param>
+    public void SetUpEnemy(int row, int column, bool canShoot, bool setsDirection)
+    {
+        ColumnID = column;
+        RowID = row;
+        CanShoot = canShoot;
+        SetsDirection = setsDirection;
     }
 
     /// <summary>

@@ -55,7 +55,8 @@ public class EnemyGridAndShootLogic : MonoBehaviour
                 {
                     if(_manager.Enemies[i].Enemies[j].IsAlive)
                     {
-                        _manager.Enemies[i].Enemies[j].SetsDirection = true;
+                        _manager.Enemies[i].Enemies[j].SetUpEnemy(_manager.Enemies[i].Enemies[j].RowID, _manager.Enemies[i].Enemies[j].ColumnID,
+                            _manager.Enemies[i].Enemies[j].CanShoot, true);
                         return;
                     }
                 }
@@ -99,7 +100,8 @@ public class EnemyGridAndShootLogic : MonoBehaviour
                 {
                     if (_manager.Enemies[i].Enemies[j].IsAlive)
                     {
-                        _manager.Enemies[i].Enemies[j].CanShoot = true;
+                        _manager.Enemies[i].Enemies[j].SetUpEnemy(_manager.Enemies[i].Enemies[j].RowID, _manager.Enemies[i].Enemies[j].ColumnID,
+    true, _manager.Enemies[i].Enemies[j].SetsDirection);
                         AddEnemyShooters(_manager.Enemies[i].Enemies[j]);
                         return;
                     }
@@ -176,7 +178,7 @@ public class EnemyGridAndShootLogic : MonoBehaviour
         {
             if(_enemyShooters[i] == enemy)
             {
-                enemy.CanShoot = false;
+                enemy.SetUpEnemy(enemy.RowID, enemy.ColumnID, false, enemy.SetsDirection);
                 _enemyShooters.RemoveAt(i);
                 break;
             }
