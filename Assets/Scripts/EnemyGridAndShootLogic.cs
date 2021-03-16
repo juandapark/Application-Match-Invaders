@@ -18,7 +18,7 @@ public class EnemyGridAndShootLogic : MonoBehaviour
     [SerializeField] private float _shootDelayMax = 6;
     [SerializeField] private GameObject _bullet;
 
-    private List<Enemy> _enemyShooters = new List<Enemy>();
+    private List<IEnemy> _enemyShooters = new List<IEnemy>();
     private List<GameObject> _bulletPool = new List<GameObject>();
     private List<GameObject> _bulletPoolCopy = new List<GameObject>();
     private int _currentShooter = -1;
@@ -161,7 +161,7 @@ public class EnemyGridAndShootLogic : MonoBehaviour
     /// Adds the shooters, these are the enemies closest to the player.
     /// </summary>
     /// <param name="enemy"></param>
-    public void AddEnemyShooters(Enemy enemy)
+    public void AddEnemyShooters(IEnemy enemy)
     {
         _enemyShooters.Add(enemy);
     }
@@ -170,7 +170,7 @@ public class EnemyGridAndShootLogic : MonoBehaviour
     /// Removes a shooter from the list of shooters.
     /// </summary>
     /// <param name="enemy"></param>
-    public void RemoveShooter(Enemy enemy)
+    public void RemoveShooter(IEnemy enemy)
     {
         for (int i = 0; i < _enemyShooters.Count; i++)
         {
@@ -181,7 +181,7 @@ public class EnemyGridAndShootLogic : MonoBehaviour
                 break;
             }
         }
-        SetNewShooter(enemy.columnID);
+        SetNewShooter(enemy.ColumnID);
     }
 
     /// <summary>

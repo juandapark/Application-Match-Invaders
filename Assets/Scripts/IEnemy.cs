@@ -13,12 +13,17 @@ public interface IEnemy
     /// <summary>
     /// Set the column for each enemy, this is very important to be able to set the shooter and direction setter.
     /// </summary>
-    int columnID { get; set; }
+    int ColumnID { get; set; }
 
     /// <summary>
     /// Set the Row for each enemy, this is very important to be able to set the shooter and direction setter.
     /// </summary>
     int RowID { get; set; }
+
+    /// <summary>
+    /// Checks if the enemy can shoot.
+    /// </summary>
+    bool CanShoot { get; set; }
 
     /// <summary>
     /// Sets the amount of units to move the enamy.
@@ -45,5 +50,10 @@ public interface IEnemy
     /// Starts the movement of the enemy.
     /// </summary>
     void StartMovement();
+
+    /// <summary>
+    /// Moves the Enemies Down.
+    /// </summary>
+    void MoveDown();
 
 }

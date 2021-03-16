@@ -10,6 +10,8 @@ using UnityEngine;
 
 public class MainCharacter : GameStateLogic
 {
+    private const string BULLET_NAME = "Bullet";
+
     [SerializeField] private float speed;
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private float _coolDown = 4;
@@ -111,7 +113,7 @@ public class MainCharacter : GameStateLogic
     /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Bullet")
+        if (collision.gameObject.tag == BULLET_NAME)
         {
             collision.gameObject.SetActive(false);
         }

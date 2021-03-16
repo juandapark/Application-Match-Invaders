@@ -22,7 +22,7 @@ public class EnemySpawnLogic : MonoBehaviour
     /// <summary>
     /// Sets the grid on Start.
     /// </summary>
-   private void Start()
+    private void Start()
     {
         StartCoroutine(SetGrid());
     }
@@ -69,7 +69,7 @@ public class EnemySpawnLogic : MonoBehaviour
 
         Enemy enemyObject = enemy.GetComponent<Enemy>();
         enemyObject.RowID = rowID;
-        enemyObject.columnID = columnID;
+        enemyObject.ColumnID = columnID;
 
         //if enemy is on the last row, make it so that it sets the direction.
         if (rowID == _numberOfRows - 1)

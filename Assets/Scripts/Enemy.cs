@@ -23,13 +23,16 @@ public class Enemy : GameStateLogic, IEnemy
     private const string BARRIER_NAME = "Barrier"; //The name of the barrier tag.
     private const string BULLET_NAME = "Bullet"; //The name of the Bullet tag.
 
-    public int columnID { get; set; }
+    // Variables from IEnemy Interface, these are public get and set because coming from the Interface,
+    //this is so is easier to make a change or add a new feature without having to scrap the whole enemy class.
+    public int ColumnID { get; set; }
     public int RowID { get; set; }
-
+    public bool CanShoot { get; set; }
     public float MoveUnits { get;  set; }
+    //////////////
+
     public bool IsAlive = true;
     public bool SetsDirection = false;
-    public bool CanShoot = false;
     public ColorType ColourType;
 
     private EnemyGraphics _enemyUI;
@@ -72,7 +75,6 @@ public class Enemy : GameStateLogic, IEnemy
     protected override void OnGameReset()
     {
         _enemyUI.StopAllCoroutines();
-
         Reset();
     }
 

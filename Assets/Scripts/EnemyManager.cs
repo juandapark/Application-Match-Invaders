@@ -46,10 +46,10 @@ public class EnemyManager : GameStateLogic
 
     [SerializeField] private CurrentDirection _direction = CurrentDirection.Right;
 
-    private List<Enemy> _listForMovement = new List<Enemy>();
-    private List<Enemy> _listForMovementCopy = new List<Enemy>();
+    private List<IEnemy> _listForMovement = new List<IEnemy>();
+    private List<IEnemy> _listForMovementCopy = new List<IEnemy>();
     private EnemyGridAndShootLogic _gridLogicAndShoot;
-    private List<Enemy> _enemiesToRemove = new List<Enemy>();
+    private List<IEnemy> _enemiesToRemove = new List<IEnemy>();
     private bool _canChangeDirection = false;
 
     /// <summary>
@@ -78,7 +78,7 @@ public class EnemyManager : GameStateLogic
     {
         _listForMovement.Clear();
         _direction = CurrentDirection.Right;
-        _listForMovement = new List<Enemy>(_listForMovementCopy);
+        _listForMovement = new List<IEnemy>(_listForMovementCopy);
         _enemiesToRemove.Clear();
         _gridLogicAndShoot.Reset();
 
@@ -239,7 +239,7 @@ public class EnemyManager : GameStateLogic
     {
         for (int i = 0; i < _listForMovement.Count; i++)
         {
-            if (_listForMovement[i])
+            if (_listForMovement[i] != null)
             {
                 _listForMovement[i].StartMovement();
                 yield return null;
@@ -269,7 +269,7 @@ public class EnemyManager : GameStateLogic
             possibleEnemiesToRemove[i].Die();
             if (possibleEnemiesToRemove[i].SetsDirection)
             {
-                _gridLogicAndShoot.SetNewCanCollideEnemy(possibleEnemiesToRemove[i].columnID);
+                _gridLogicAndShoot.SetNewCanCollideEnemy(possibleEnemiesToRemove[i].ColumnID);
             }
 
             if (possibleEnemiesToRemove[i].CanShoot)
@@ -278,7 +278,6 @@ public class EnemyManager : GameStateLogic
             }
         }
     }
-
 
     /// <summary>
     /// This gets all the possible enemies to be killed on the position of the grid to the enemy that you passed.
@@ -296,19 +295,19 @@ public class EnemyManager : GameStateLogic
             for (int j = 0; j < Enemies[i].Enemies.Count; j++)
             {
                 //Remove enemy from the right
-                if (Enemies[i].Enemies[j].columnID == enemies.columnID + 1 && Enemies[i].Enemies[j].RowID == enemies.RowID && Enemies[i].Enemies[j].ColourType == enemies.ColourType)
+                if (Enemies[i].Enemies[j].ColumnID == enemies.ColumnID + 1 && Enemies[i].Enemies[j].RowID == enemies.RowID && Enemies[i].Enemies[j].ColourType == enemies.ColourType)
                 {
                     possibleEnemiesToRemove.Add(Enemies[i].Enemies[j]);
                 }
-                else if (Enemies[i].Enemies[j].columnID == enemies.columnID - 1 && Enemies[i].Enemies[j].RowID == enemies.RowID && Enemies[i].Enemies[j].ColourType == enemies.ColourType) //Remove Enemy From the left
+                else if (Enemies[i].Enemies[j].ColumnID == enemies.ColumnID - 1 && Enemies[i].Enemies[j].RowID == enemies.RowID && Enemies[i].Enemies[j].ColourType == enemies.ColourType) //Remove Enemy From the left
                 {
                     possibleEnemiesToRemove.Add(Enemies[i].Enemies[j]);
                 }
-                else if (Enemies[i].Enemies[j].RowID == enemies.RowID - 1 && Enemies[i].Enemies[j].columnID == enemies.columnID && Enemies[i].Enemies[j].ColourType == enemies.ColourType)//remove enemy from the top
+                else if (Enemies[i].Enemies[j].RowID == enemies.RowID - 1 && Enemies[i].Enemies[j].ColumnID == enemies.ColumnID && Enemies[i].Enemies[j].ColourType == enemies.ColourType)//remove enemy from the top
                 {
                     possibleEnemiesToRemove.Add(Enemies[i].Enemies[j]);
                 }
-                else if (Enemies[i].Enemies[j].RowID == enemies.RowID + 1 && Enemies[i].Enemies[j].columnID == enemies.columnID && Enemies[i].Enemies[j].ColourType == enemies.ColourType)//Remove enemy from the bottom
+                else if (Enemies[i].Enemies[j].RowID == enemies.RowID + 1 && Enemies[i].Enemies[j].ColumnID == enemies.ColumnID && Enemies[i].Enemies[j].ColourType == enemies.ColourType)//Remove enemy from the bottom
                 {
                     possibleEnemiesToRemove.Add(Enemies[i].Enemies[j]);
                 }
